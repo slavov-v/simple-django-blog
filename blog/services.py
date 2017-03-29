@@ -17,7 +17,6 @@ def create_post(request, cleaned_data):
     title = cleaned_data.get('title')
     content = cleaned_data.get('content')
     tags = cleaned_data.get('tags')
-    import ipdb; ipdb.set_trace()
     post = BlogPost(title=title, content=content, author=user)
     post.save()
     post = BlogPost.objects.get(title=title)
