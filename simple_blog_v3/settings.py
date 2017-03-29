@@ -125,5 +125,4 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static',
-    'bower_components'
 ]
