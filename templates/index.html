@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+	<link rel="shortcut icon" href="{% static 'images/flavicon.png' %}">
+	<title>A simple django blog</title>
+
+	<!-- Bootstrap Core CSS -->
+	<link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
+  <link href="{% static 'animate.css/animate.min.css' %}" rel="stylesheet">
+
+	<!-- Vendor css -->
+	<link href="{% static 'owlcarousel/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+	<link href="{% static 'magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet">
+
+	<!-- Template base -->
+	<link href="{% static 'css/theme-base.css' %}" rel="stylesheet">
+
+	<!-- Template elements -->
+	<link href="{% static 'css/theme-elements.css' %}" rel="stylesheet">
+
+<!-- Responsive classes -->
+	<link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+
+	<!-- Template color -->
+	<link href="{% static 'css/color-variations/blue.css' %}" rel="stylesheet" type="text/css" media="screen" title="blue">
+
+	<!-- LOAD GOOGLE FONTS -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
+
+	<!-- BLOG FONT & STYLE -->
+	<link href="http://fonts.googleapis.com/css?family=Damion" rel="stylesheet" type="text/css">
+	<link href="{% static 'homepages/blog/css/style-blog.css' %}" media="screen" rel="stylesheet" type="text/css" />
+
+    <!--VENDOR SCRIPT-->
+		<script
+	src="https://code.jquery.com/jquery-1.11.2.min.js"
+	integrity="sha256-Ls0pXSlb7AYs7evhd+VLnWsZ/AqEHcXBeMZUycz/CcA="
+	crossorigin="anonymous"></script>
+    <script src="{% static 'vendor/plugins-compressed.js' %}"></script>
+
+</head>
+
+<body class="wide">
+	<!--SITE LOADER-->
+	<div class="loader-wrapper">
+		<div class="loader"> <img width="40" src="{% static 'images/svg-loaders/puff.svg' %}" alt=""> <span class="loader-title">Page is loading, just a sec...</span> </div>
+	</div>
+	<!--END: SITE LOADER-->
+
+	<!--WRAPPER-->
+	<div class="wrapper">
+		<!--HEADER-->
+		<header id="header" class="header-mini header-dark">
+			<div id="header-wrap">
+				<div class="container">
+
+
+					<!--MOBILE MENU -->
+					<div class="nav-main-menu-responsive">
+						<button class="lines-button x">
+							<span class="lines"></span>
+						</button>
+					</div>
+					<!--END: MOBILE MENU -->
+
+					<!--NAVIGATION-->
+					<div class="navbar-collapse collapse main-menu-collapse navigation-wrap">
+						<div class="container">
+							<nav class="main-menu mega-menu" id="mainMenu">
+								<ul class="main-menu nav nav-pills">
+									<li><a href="{% url 'blog:index' %}"><i class="fa fa-home"></i></a> </li>
+									<li><a href="{% url 'blog:login' %}">Log in</a></li>
+									<li><a href="{% url 'blog:register' %}">Register</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--END: NAVIGATION-->
+				</div>
+			</div>
+		</header>
+		<!--END: HEADER-->
+
+<!-- CONTENT -->
+<section class="p-t-40">
+	<div class="container">
+		<div class="row">
+			<!-- Blog post-->
+			<div class="post-content post-thumbnail col-md-9">
+        {% for post in  all_posts %}
+        <!-- Blog image post-->
+
+        <div class="post-item">
+          <div class="post-content-details">
+            <div class="post-title">
+              <h3><a href="{% url 'blog:post-detail' id=post.id %}">{{ post.title }}</a></h3>
+            </div>
+            <div class="post-info">
+              <span class="post-autor">Post by: {{ post.author }}</a></span>
+            </div>
+          </div>
+          <div class="post-meta">
+            <div class="post-date">
+              <span class="post-date-day">{{ post.created_at.day }}</span>
+              <span class="post-date-month">{{ post.created_at.month }}</span>
+              <span class="post-date-year">{{ post.created_at.year }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+				<!-- END: Blog post-->
+			</div>
+
+			<!-- Sidebar-->
+			<div class="sidebar col-md-3">
+
+				<!--widget categories-->
+				<div class="widget clearfix widget-categories">
+					<h4 class="widget-title">Categories</h4>
+					<ul class="list list-arrow-icons">
+            TODO: Implement filtering by tags
+            {% for tag in all_tags %}
+              <li> <a title="" href="#">{{ tag.name }} </a> </li>
+            {% endfor %}
+					</ul>
+				</div>
+				<!--end: widget categories-->
+
+				<!--widget blockquote -->
+				<div class="widget clearfix widget-blockquote">
+					<h4 class="widget-title">Quote of the day</h4>
+					<blockquote class="blockquote-simple">
+						<p>Art is the only serious thing in the world. And the artist is the only person who is never serious.</p>
+						<small>by <cite>Oscar Wilde</cite></small>
+					</blockquote>
+				</div>
+				<!--end: widget blockquote -->
+
+			</div>
+			<!-- END: Sidebar-->
+		</div>
+	</div>
+</section>
+<!-- END: SECTION -->
+
+<!-- FOOTER -->
+<footer class="background-dark text-grey" id="footer">
+	<div class="copyright-content">
+		<div class="container">
+			<div class="row">
+				<div class="copyright-text text-center">  A simple Django blog
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- END: FOOTER -->
+	</div>
+	<!-- END: WRAPPER -->
+
+	<!-- GO TOP BUTTON -->
+	<a class="gototop gototop-button" href="#"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- Theme Base, Components and Settings -->
+	<script src="{% static 'js/theme-functions.js' %}"></script>
+
+	<!-- Custom js file -->
+	<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>

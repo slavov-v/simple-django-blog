@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+	<title>{{ post.title }}</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
+  <link href="{% static 'animate.css/animate.min.css' %}" rel="stylesheet">
+
+  <!-- Vendor css -->
+  <link href="{% static 'owlcarousel/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+  <link href="{% static 'magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet">
+
+  <!-- Template base -->
+  <link href="{% static 'css/theme-base.css' %}" rel="stylesheet">
+
+  <!-- Template elements -->
+  <link href="{% static 'css/theme-elements.css' %}" rel="stylesheet">
+
+  <!-- Responsive classes -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <![endif]-->
+
+
+  <!-- Template color -->
+  <link href="{% static 'css/color-variations/blue.css' %}" rel="stylesheet" type="text/css" media="screen" title="blue">
+
+  <!-- LOAD GOOGLE FONTS -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
+
+  <!-- BLOG FONT & STYLE -->
+  <link href="http://fonts.googleapis.com/css?family=Damion" rel="stylesheet" type="text/css">
+  <link href="{% static 'homepages/blog/css/style-blog.css' %}" media="screen" rel="stylesheet" type="text/css" />
+
+    <!--VENDOR SCRIPT-->
+		<script
+  src="https://code.jquery.com/jquery-1.11.2.min.js"
+  integrity="sha256-Ls0pXSlb7AYs7evhd+VLnWsZ/AqEHcXBeMZUycz/CcA="
+  crossorigin="anonymous"></script>
+    <script src="{% static 'vendor/plugins-compressed.js' %}"></script>
+
+</head>
+
+<body class="wide">
+
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header id="header" class="header-transparent">
+			<div id="header-wrap">
+				<div class="container">
+
+
+					<!--MOBILE MENU -->
+					<div class="nav-main-menu-responsive">
+						<button class="lines-button x">
+							<span class="lines"></span>
+						</button>
+					</div>
+					<!--END: MOBILE MENU -->
+
+
+		</header>
+		<!-- END: HEADER -->
+
+<!-- PAGE TITLE -->
+<section id="page-title" class="page-title-parallax page-title-center text-dark" style="background-image:url(images/parallax/page-title-parallax.jpg);">
+	<div class="container">
+		<div class="page-title col-md-8">
+			<h1><a href="{% url 'blog:index' %}">BLOG</a></h1>
+            <span>{{ post.title }}</span>
+        </div>
+    </div>
+</section>
+<!-- END: PAGE TITLE -->
+
+
+<section class="content">
+    <div class="container">
+        <div class="row">
+            <div class="post-content post-classic post-content-single col-md-9">
+                <div class="post-item">
+                    <div class="post-content-details">
+                        <div class="post-title">
+                            <h2>{{ post.title }}</h2>
+                        </div>
+                        <div class="post-info">
+                            <span class="post-autor">{{ post.author }}</span>
+                        </div>
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-date">
+                            <span class="post-date-day">{{ post.created_at.day }}</span>
+                            <span class="post-date-month">{{ post.created_at.month }}</span>
+                            <span class="post-date-year">{{ post.created_at.year }}</span>
+                        </div>
+
+                        <div class="post-comments">
+                            <a href="#">
+                                <i class="fa fa-comments-o"></i>
+                                <span class="post-comments-number">{{ comments.count }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="comments" class="comments">
+                    <div class="heading">
+                        <h4 class="comments-title">Comments <small class="number">(4)</small></h4>
+                    </div>
+
+                    {% for comment in comments %}
+                      <div class="comment">
+                          <div class="media-body">
+                              <h4 class="media-heading">{{ comment.email }}</h4>
+                              <p class="time">{{ comment.created_at }}</p>
+                              <p>{{ comment.content }}</p>
+                          </div>
+                      </div>
+                    {% endfor %}
+
+
+                </div>
+                <div class="comment-form">
+                    <div class="heading">
+                        <h4>Leave a comment</h4>
+                    </div>
+                    <form class="form-gray-fields" action="{% url 'blog:add-comment' id=post.id %}" method="post">
+                      {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="comment" class=upper>{{ form.email.label }}</label>
+                                    {{ form.email }}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="comment" class="upper">{{ form.content.label }}</label>
+                                    {{ form.content }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;Post comment</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="sidebar sidebar-modern col-md-3">
+                <!--widget tags -->
+                <div class="widget clearfix widget-tags">
+                    <h4 class="widget-title">Tags</h4>
+                    <div class="tags">
+                        {% for tag in tags %}
+                          {{ tag.name }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--end: widget tags -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END: SECTION -->
+
+</div>
+<!-- END: WRAPPER -->
+
+<!-- GO TOP BUTTON -->
+<a class="gototop gototop-button" href="#"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- Theme Base, Components and Settings -->
+	<script src="{% static 'js/theme-functions.js' %}"></script>
+
+<!-- Custom js file -->
+<script src="{% static 'js/custom.js' %}"></script>
+
+
+</body>
+</html>
