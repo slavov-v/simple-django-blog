@@ -8,46 +8,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
-	<title>{{ post.title }}</title>
+	<link rel="shortcut icon" href="{% static 'images/flavicon.png' %}">
+	<title>A simple django blog</title>
 
-  <!-- Bootstrap Core CSS -->
-  <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
-  <link href="{% static 'animate.css/animate.min.css' %}" rel="stylesheet">
+	<!-- Bootstrap Core CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 
-  <!-- Vendor css -->
-  <link href="{% static 'owlcarousel/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
-  <link href="{% static 'magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet">
+	<!-- Vendor css -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" rel="stylesheet">
 
-  <!-- Template base -->
-  <link href="{% static 'css/theme-base.css' %}" rel="stylesheet">
+	<!-- Template base -->
+	<link href="{% static 'css/theme-base.css' %}" rel="stylesheet">
 
-  <!-- Template elements -->
-  <link href="{% static 'css/theme-elements.css' %}" rel="stylesheet">
+	<!-- Template elements -->
+	<link href="{% static 'css/theme-elements.css' %}" rel="stylesheet">
 
-  <!-- Responsive classes -->
-  <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+<!-- Responsive classes -->
+	<link href="{% static 'css/responsive.css' %}" rel="stylesheet">
 
-  <!--[if lt IE 9]>
-    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-  <![endif]-->
+<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
 
 
-  <!-- Template color -->
-  <link href="{% static 'css/color-variations/blue.css' %}" rel="stylesheet" type="text/css" media="screen" title="blue">
+	<!-- Template color -->
+	<link href="{% static 'css/color-variations/blue.css' %}" rel="stylesheet" type="text/css" media="screen" title="blue">
 
-  <!-- LOAD GOOGLE FONTS -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
+	<!-- LOAD GOOGLE FONTS -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
 
-  <!-- BLOG FONT & STYLE -->
-  <link href="http://fonts.googleapis.com/css?family=Damion" rel="stylesheet" type="text/css">
-  <link href="{% static 'homepages/blog/css/style-blog.css' %}" media="screen" rel="stylesheet" type="text/css" />
+	<!-- BLOG FONT & STYLE -->
+	<link href="http://fonts.googleapis.com/css?family=Damion" rel="stylesheet" type="text/css">
+	<link href="{% static 'homepages/blog/css/style-blog.css' %}" media="screen" rel="stylesheet" type="text/css" />
 
     <!--VENDOR SCRIPT-->
 		<script
-  src="https://code.jquery.com/jquery-1.11.2.min.js"
-  integrity="sha256-Ls0pXSlb7AYs7evhd+VLnWsZ/AqEHcXBeMZUycz/CcA="
-  crossorigin="anonymous"></script>
+	src="https://code.jquery.com/jquery-1.11.2.min.js"
+	integrity="sha256-Ls0pXSlb7AYs7evhd+VLnWsZ/AqEHcXBeMZUycz/CcA="
+	crossorigin="anonymous"></script>
     <script src="{% static 'vendor/plugins-compressed.js' %}"></script>
 
 </head>
