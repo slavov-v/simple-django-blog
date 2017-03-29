@@ -2,7 +2,7 @@ from django.conf.urls import url
 from blog import views
 
 urlpatterns = [
-    url(r'$', views.index_view, name='index'),
+    url(r'^$', views.index_view, name='index'),
     url(r'create-post/$', views.create_post_view, name='create-post'),
     url(r'post_detail/(?P<id>[0-9]+)/$', views.post_detail_view,
         name='post-detail'),
