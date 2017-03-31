@@ -12,7 +12,6 @@ from .services import register_user, create_post
 
 
 def index_view(request, *args, **kwargs):
-    import ipdb; ipdb.set_trace()
     all_tags = Tag.objects.all()
     if request.user.is_active:
         all_posts = BlogPost.objects.all()
