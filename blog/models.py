@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from .querysets import BlogPostQuerySet
 
 # Create your models here.
 
@@ -21,6 +22,9 @@ class BlogPost(models.Model):
     tags = models.ManyToManyField(Tag,
                                   related_name='posts',
                                   blank=True)
+    is_private = models.BooleanField(default=False)
+
+    objects = BlogPostQuerySet.as_manager()
 
     def __str__(self):
         return self.title
