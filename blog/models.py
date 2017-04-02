@@ -31,7 +31,7 @@ class BlogPost(models.Model):
 
     def save(self, *args, **kwargs):
         self.last_updated_at = timezone.now()
-        super().save(self, *args, **kwargs)
+        super(BlogPost, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
