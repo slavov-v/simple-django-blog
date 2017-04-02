@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from faker import Factory
 from .models import BlogPost, Tag, Comment
-from .factories import UserFactory
+from .factories import UserFactory, BlogPostFactory
 from .services import register_user
 faker = Factory.create()
 
@@ -120,7 +120,30 @@ class TestCreatePostView(TestCase):
         response = self.client.post(self.url,
                                     data={'title': faker.word(),
                                           'content': faker.text(max_nb_chars=20)})
-
+        post = BlogPost.objects.last()
         self.assertRedirects(response,
                              expected_url=reverse('blog:post-detail',
-                                                  kwargs={'id': 1}))
+                                                  kwargs={'id': post.id}))
+
+
+class TestCreateCommentView(TestCase):
+
+    def setUp(self):
+        self.username = faker.word()
+        self.password = 'cabbage'
+        self.user = register_user({'username': self.username,
+                                   'password': self.password})
+        self.post = BlogPostFactory(author=self.user)
+        self.client = Client()
+        self.url = reverse('blog:add-comment', kwargs={'id': self.post.id})
+
+    def test_get_method(self):
+        self.client.login(username=self.username, password=self.password)
+        response = self.client.get(self.url)
+        self.assertRedirects(response, reverse('blog:post-detail', kwargs={'id': self.post.id}))
+
+    def test_post_method(self):
+        self.client.login(username=self.username, password=self.password)
+        response = self.client.post(self.url, data={'email': 'foo@bar.com',
+                                                    'content': faker.text(max_nb_chars=20)})
+        self.assertRedirects(response, reverse('blog:post-detail', kwargs={'id': self.post.id}))
