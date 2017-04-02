@@ -12,12 +12,15 @@ from .services import register_user, create_post
 
 
 def index_view(request, *args, **kwargs):
-    all_tags = Tag.objects.all()
-    if request.user.is_active:
-        all_posts = BlogPost.objects.all()
+    if request.method == 'GET':
+        all_tags = Tag.objects.all()
+        if request.user.is_active:
+            all_posts = BlogPost.objects.all()
+        else:
+            all_posts = BlogPost.objects.get_public_posts()
+        return render(request, 'index.html', locals())
     else:
-        all_posts = BlogPost.objects.get_public_posts()
-    return render(request, 'index.html', locals())
+        return HttpResponse(status=403)
 
 
 @login_required(login_url=reverse_lazy('blog:login'))
@@ -58,9 +61,12 @@ def add_comment_view(request, *args, **kwargs):
 def register_view(request, *args, **kwargs):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = register_user(form.cleaned_data)
-            return redirect('blog:login')
+        try:
+            if form.is_valid():
+                user = register_user(form.cleaned_data)
+                return redirect('blog:login')
+        except Exception as e:
+            errors = "User already exists"
     else:
         form = RegisterForm()
     return render(request, 'register.html', locals())
@@ -75,9 +81,11 @@ def login_view(request, *args, **kwargs):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user.is_authenticated():
+            if user is not None and user.is_authenticated():
                 login(request, user)
                 return redirect('blog:profile')
+            else:
+                return redirect('blog:login')
     else:
         form = LoginForm()
     return render(request, 'login.html', locals())

@@ -102,6 +102,9 @@
                         </div>
                         <form class="form-gray-fields" action="" method="POST">
                           {% csrf_token %}
+													<div class="errors">
+														<span>{{ errors }}</span>
+													</div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
